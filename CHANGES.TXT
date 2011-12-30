@@ -1,0 +1,298 @@
+CHANGES
+-------
+
+The major number changes for such things as code rewrites, changes in
+syntax, and/or dramatic changes in functionality. The minor number
+changes for corrections, enhancements, etc. made to the code. There
+is no set schedule for releases.
+
+--TODO--
+
+
+--0.15--
+
+   !	Assert unlimited (-1) default for milter-limit-rcpt-connect and
+	milter-limit-rcpt-connect.
+
+--0.14--
+
+   !	Silence 64-bit compiler warnings about signedness of arg 2
+   	to DataInitWithBytes() calls.
+
+   +	Added milter-limit-rcpt-connect:, milter-limit-rcpt-from:, and
+   	milter-limit-rcpt-auth: tag to impose per message recipient
+   	limits. Commissioned by Lewis Bergman.
+
+   !	Rephrased the milter-limit tag descriptions.
+
+--0.13--
+
+   +	Requires LibSnert 1.63
+
+   !	Replaced test whether {if_addr} macro is undefined, ie. localhost
+	with isReservedIP(IS_IP_LOCALHOST) instead since Postfix 2.3
+	does not support the {if_addr} macro and so is always undefined.
+
+   !	Fix typo error in default setting of count-null-sender which
+   	should have been a hyphen (-), not underscore (_). On a QWERTY
+   	keyboard they are on the same key. Doh!
+
+  !!	The precedence order for the milter-limit tags has been changed
+  	in order to allow more intuitive overrides of the general to the
+  	specific. The precedence is now highest to lowest:
+
+  		milter-limit-auth
+  		milter-limit-to
+  		milter-limit-from
+  		milter-limit-connect
+
+  	The impact of this means that all rejection happen at RCPT TO:
+  	time instead of MAIL FROM: (connect, auth, from) and RCPT TO:
+
+  	The reason for changing was that the previous behaviour for
+  	something like:
+
+		milter-limit-Connect:   		500/1d
+		milter-limit-From:user@example.com      5000/1d
+
+  	would reject based on the milter-limit-connect: tag, ignoring
+  	the possibility to override with milter-limit-from: or other
+  	tags. Requested by Michael Long.
+
+   !	atExitCleanUp(): added NULL guard around cache cleanup code in
+   	case its the cache was not initialised.
+
+   !	filterMail(): fixed handling of SMTP AUTH not being applied
+	correctly until the 2nd message transaction during an SMTP
+	session. Reported by Evgeny A Grebenshikov.
+
+   !	Corrected documentation error concerning two cache-type
+	options when it should have been cache-file and cache-type.
+
+   +	access-db now supports socket-map, flat-file, and SQLite3
+	lookups in addition to Berkeley DB. The SQLite3 behaviour
+	can be disabled via LibSnert's ./configure script.
+
+--0.12--
+
+   +	Requires LibSnert 1.62
+
+  !!	License 1.4 which provides additional details with regards to
+  	possible license controls used, the possibility of "phone
+  	home code" and its general contents, and related privacy
+  	statement.
+
+   +	Add check for filterOpen() got NULL socket address pointer
+	passed to filterOpen() which inidicates an unsupported address
+	type. The connection is simply accepted to bypass the milter.
+
+
+--0.11--
+
+   +	Requires LibSnert 1.61
+
+  !!	Complete replacement of option specification and no backwards.
+	compatibility. The newer format allows for better integration
+	of previously undocumented libsnert options and for the
+	inclusion of future enhancements.
+
+   !	filterClose(): remove reporting of "null workspace error",
+	which can occur when a client connection is rejected before or
+	by filterOpen().
+
+   !	Minor corrections for gcc -Wall warnings.
+
+--0.10--
+
+   +	Added -p policy option. Requested by Sergey N. Romanov.
+
+--0.9--
+
+   !	Fixed regression where matches of the default limits where
+	grouped together in the cache as one entry instead being counted
+	separately. The cache should be discarded. Reported by Michael
+	Long.
+
+   +	Added -i option to always cache counts individually by IP or
+   	mail address, instead of by rule group. Requested by Panagiotis
+   	Christias.
+
+  !!	Fixed incorrect invocation of smfAccessClient() with
+	client_addr and client_name arguments swapped. Reported by
+	Panagiotis Christias.
+
+   !	cacheUpdate(): fixed problem where if a cache entry had expired,
+   	then only the expire time was properly reset and not the counter.
+   	Reported by Panagiotis Christias.
+
+   !	Reverted back to libmilter's default (7210s) timeout. This
+	should silence many of the reported sendmail to milter timeout
+	errors and/or broken connections caused by the milter timing
+	out sooner than sendmail does with the current SMTP client.
+	The sendmail defaults for each SMTP command and receiving the
+	message content is 1h each and so libmilter allows for 2h 10s.
+	But in theory you could be DoS for between 5 and 104 hours per
+	connection. If you want to change this then set in
+	sendmail.mc:
+
+		define(`confTO_DATABLOCK',      `30m')
+		define(`confTO_COMMAND',        `5m')
+
+--0.8--
+
+   +	Requires LibSnert 1.57
+
+   +	Added -a option to enable unlimited messages for SMTP
+	authenticated users. The previous behaviour was as though
+	-a was always enabled. Requested by Michael Long.
+
+   !	cacheGarbageCollect() simplified to use the milter connection
+	ID for the GC frequency counter. This removes the need for a
+	separate variable and only applies the mutex lock when an
+	actual GC should be done. Based on milter-sender 1.7 changes.
+
+   !	cachePut() replaced by cacheUpdate() to fix race condition
+   	in updating the cache entries. Reported by John Thiltges.
+
+   !	Support for RHS pattern lists added by using smfAccessClient()
+   	and smfAccessEmail(). This means that milter-limit-*:default
+   	entryis have been replaced by milter-limit-*: ie simply drop
+   	the word "default" from the lookup.
+
+   +	Added support for:
+
+   		milter-limit-auth:authid	RHS
+   		milter-limit-auth:		RHS
+
+   	Requested by Michael Long.
+
+   !	Replaced sscanf() parsing of the limit with something more
+   	flexible and forgiving such that:
+
+   		""		->	-1/1s
+   		"word"		->	-1/1s
+   		"/"		->	-1/1s
+   		"10"		->	10/1s
+   		"10/d"		->	10/1d
+   		"10/60"		->	10/60s
+
+--0.7--
+
+   +	Requires LibSnert 1.56
+
+   !	Changed install.sh.in to create /var/run/mitler/ directory
+   	owned by milter:milter and change the default PID_FILE and
+   	SOCKET_FILE paths. This provides better privelage/security
+   	separation since the milters run as milter:milter.
+
+--0.6--
+
+   +	Added "milter-limit-connect:default" to set per IP rates when no
+	specific message rate limit is defined. Requested by Jeremie
+	of AIM.
+
+   +	Also added milter-limit-from:default and milter-limit-to:default
+   	for orthogonal functionality.
+
+   +	Added -n option to always count the DNS null adderss <> in
+	connecting client limits.
+
+	This might impact call-back and call-ahead systems like
+	milter-sender, milter-ahead, postini (I think). For example in
+	some instances you might say occassional call-backs from
+	unknown systems are fine, but excessive instances from the
+	same system might be an indication of a spam attack on the
+	calling system. In some ways this option could help both your
+	system and theirs defend against the problem.
+
+	If you're upstream secondary MX uses call-ahead, you might want
+	to take care with milter-limit-connect:default and create a
+	special limit for them or exclude them from testing.
+
+   +	Added documentation about the purpose of negative limits to
+	disable limits and allow unlimited messages. This is important
+	in some instance with -n and defaults to exclude some systems
+	from being limited, like secondary MXes. This has always been
+	possible, just not documented.
+
+--0.5--
+
+   +	Requires LibSnert 1.45
+
+   -	Remove use smdbReload(). This function was removed in libsnert-1.45.
+
+--0.4--
+
+   +	Requires LibSnert 1.42
+
+   !	install.sh: fix use of id -u, which doesn't work on SunOS
+
+   !	install.sh: fix use of bang (!) logical-NOT operator, which
+   	is not available in real Bourne shells or csh.
+
+   !	install.sh: SunOS grep does not have a -q option
+
+   !	install.sh: fixed "if which command ; then" tests with a
+	function. which(1) always returns success (0) on SunOS.
+
+   !	install.sh: SunOS has two different install(1) tools with
+   	different options (-o vs. -u) to set the file owner.
+
+   !	Fix cache file permissions.
+
+   !	Fix -H, which failed to add the X-Scanned-By header.
+
+
+--0.3--
+
+   +	Requires LibSnert 1.41
+
+   !	Fixed configure.in script to better handle Berkeley DB library
+   	and header searches. All these cases should now work.
+
+   		./configure
+   		./configure --with-db
+   		./configure --with-db=/usr/local/BerkeleyDB-4.2
+   		./configure --without-db
+
+   !	Fixed the start-up script to unalias shell function names
+	before defining the function. Reported by Francisco of
+	Blackant dot Net.
+
+   !	Encapsulated announce/pass/fail output the startup-script to
+	support different OS favours; some like pretty output, some
+	like it simple.
+
+   -	configure.in: Removed gcc option -fvolatile, which is no longer
+   	supported in as of gcc 3.4.
+
+   +	The milter now starts as a background process and can kill a
+	previous instance of itself using the -x option. The -X option
+	is undocumented, but starts the application as a foreground
+	process for the purpose of debugging.
+
+   +	Added support for a /etc/mail/milter-name.cf file that can
+   	contain command-line options and an optional socket argument.
+
+   !	The socket argument is now optional.
+
+   !	The above three changes allow for a simplified startup script
+	template for use by all my milters.
+
+  !!	Updated LICENSE.TXT.
+
+--0.2--
+
+   +	Requires LibSnert 1.40
+
+   !	Renamed DataInitFromBytes() -> DataInitWithBytes() to remain
+	consistent with my naming/action conventions. A *FromType is a
+	copy from source and a *WithType is an assignment and/or
+	passing of responsiblity of source.
+
+--0.1--
+
+   +	Requires LibSnert 1.39
+
+
+

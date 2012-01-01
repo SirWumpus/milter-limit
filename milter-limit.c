@@ -586,9 +586,12 @@ filterOpen(SMFICTX *ctx, char *client_name, _SOCK_ADDR *raw_client_addr)
 		}
 	}
 
+	value = NULL;
+	data->maxRcptSender = data->maxRcptConnect = -1;
 	access = smfAccessClient(&data->work, MILTER_NAME "-rcpt-connect:", data->client_name, data->client_addr, NULL, &value);
 	if (access != SMDB_ACCESS_NOT_FOUND) {
-		data->maxRcptConnect = (int) strtol(value, NULL, 10);
+		if (access == SMDB_ACCESS_UNKNOWN)
+			data->maxRcptConnect = (int) strtol(value, NULL, 10);
 		free(value);
 	}
 
@@ -702,15 +705,19 @@ filterMail(SMFICTX *ctx, char **args)
 		}
 	}
 
+	value = NULL;
 	access = smfAccessEmail(&data->work, MILTER_NAME "-rcpt-from:", data->mail.path->address.string, NULL, &value);
 	if (access != SMDB_ACCESS_NOT_FOUND) {
-		data->maxRcptSender = (int) strtol(value, NULL, 10);
+		if (access == SMDB_ACCESS_UNKNOWN)
+			data->maxRcptSender = (int) strtol(value, NULL, 10);
 		free(value);
 	}
 
-	access = smfAccessClient(&data->work, MILTER_NAME "-rcpt-auth:", auth_authen, data->mail.path->address.string, NULL, &value);
+	value = NULL;
+	access = smfAccessAuth(&data->work, MILTER_NAME "-rcpt-auth:", auth_authen, data->mail.path->address.string, NULL, &value);
 	if (access != SMDB_ACCESS_NOT_FOUND) {
-		data->maxRcptSender = (int) strtol(value, NULL, 10);
+		if (access == SMDB_ACCESS_UNKNOWN)
+			data->maxRcptSender = (int) strtol(value, NULL, 10);
 		free(value);
 	}
 

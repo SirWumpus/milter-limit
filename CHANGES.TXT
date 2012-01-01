@@ -14,6 +14,16 @@ is no set schedule for releases.
    !	Assert unlimited (-1) default for milter-limit-rcpt-connect and
 	milter-limit-rcpt-connect.
 
+   !	Fix incorrect lookup for milter-limit-rcpt-auth; should use
+   	smfAccessAuth() instead of smfAccessClient() (copy error).
+
+  !!	Fix seg.fault related milter-limit-rcpt-from (and similarly for
+	milter-limit-rcpt-connect and milter-limit-rcpt-auth); assert
+	that the pointer passed back from smfAccessEmail() is initially
+	NULL. This is actually a bug in smfAccessPattern() concerning
+	incorrect order of NULL guards, which will be fixed in the next
+	libsnert release.
+
 --0.14--
 
    !	Silence 64-bit compiler warnings about signedness of arg 2

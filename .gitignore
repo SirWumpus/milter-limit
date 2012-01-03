@@ -34,3 +34,4 @@ config.h
 experimental/*
 
 milter-limit
+configure.lineno

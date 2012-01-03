@@ -1,7 +1,7 @@
 /*
  * milter-limit.c
  *
- * Copyright 2003, 2006 by Anthony Howe. All rights reserved.
+ * Copyright 2003, 2012 by Anthony Howe. All rights reserved.
  *
  * The following should be added to the sendmail.mc file:
  *
@@ -134,8 +134,8 @@
 #include <com/snert/lib/util/getopt.h>
 #include <com/snert/lib/util/setBitWord.h>
 
-#if LIBSNERT_MAJOR < 1 || LIBSNERT_MINOR < 63
-# error "LibSnert/1.63 or better is required"
+#if LIBSNERT_MAJOR < 1 || LIBSNERT_MINOR < 75
+# error "LibSnert 1.75.8 or better is required"
 #endif
 
 #define MILTER_STRING	MILTER_NAME"/"MILTER_VERSION

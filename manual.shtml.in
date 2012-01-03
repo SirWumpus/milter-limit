@@ -964,70 +964,89 @@ I would like to express my thanks to Derek Balling for his support at
 
 <!-- License Agreement -->
 
-<h3>License Agreement 1.4</h3>
+<h3>License Agreement 1.8</h3>
 <p>
-SNERTSOFT IS WILLING TO LICENSE THE SOFTWARE IDENTIFIED ABOVE TO YOU
+SNERTSOFT &amp; CO. ARE WILLING TO LICENSE THE SOFTWARE IDENTIFIED ABOVE TO YOU
 ONLY UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED
 IN THIS LICENSE AGREEMENT. PLEASE READ THE AGREEMENT CAREFULLY. BY
 DOWNLOADING OR INSTALLING THIS SOFTWARE, YOU ACCEPT THE TERMS OF THE
 AGREEMENT.
 </p>
-<ol>
+
+<ol style="clear: both; padding: 10px 0px 0px 1.2em;">
 <li><h4>Definitions</h4>
 	<ol>
 	<li><p>
-	``Package'' means the identified above in source and/or binary
-	form, any other machine readable materials provided (including,
-	but not limited to documentation, sample files, data files),
-	any updates or error corrections, and its derivative works.
+``Package'' means the identified above in source and/or binary
+form, any other machine readable materials provided (including,
+but not limited to documentation, sample files, data files),
+any updates or error corrections, and its derivative works.
 	</p></li>
 	<li><p>
-    ``Private Individual'' means an individual using the Package for
-     personal, private, and non-commercial use only.
+``Organisation'' means a legal entity or an individual.
 	</p></li>
 	<li><p>
-    ``Organisation'' means a legal entity or an individual that does
-     not qualify as a Private Individual defined above.
+``You'' (or ``Your'') means an Organisation
+ exercising rights under, and complying with all of the terms of,
+ this License or a future version of this License issued under
+ Section 6.1.  For legal entities, ``You'' includes any entity
+ which controls, is controlled by, or is under common control with
+ You.  For purposes of this definition,``control'' means (a) the
+ power, direct or indirect, to cause the direction or management
+ of such entity, whether by contract or otherwise, or (b)
+ ownership of more than fifty percent (50%) of the outstanding
+ shares or beneficial ownership of such entity.
 	</p></li>
 	<li><p>
-    ``You'' (or ``Your'') means a Private Individual or Organisation
-     exercising rights under, and complying with all of the terms of,
-     this License or a future version of this License issued under
-     Section 5.1.  For legal entities, ``You'' includes any entity
-     which controls, is controlled by, or is under common control with
-     You.  For purposes of this definition,``control'' means (a) the
-     power, direct or indirect, to cause the direction or management
-     of such entity, whether by contract or otherwise, or (b)
-     ownership of more than fifty percent (50%) of the outstanding
-     shares or beneficial ownership of such entity.
+``SnertSoft'' means Anthony C. Howe situated in Cannes, France
+(SIRET #489 259 937 00014).
 	</p></li>
 	<li><p>
-	The Package is an original work written by Anthony C. Howe,
-	hereto referred to as the ``Author''.
+``SnertSoft &amp; Co.'' means SnertSoft and all authorised &amp;
+licensed partners, such as value-added resellers or appliance manufacturers.
 	</p></li>
 	</ol>
 </li>
 
+<li><h4>Statement of Original Work</h4>
+	<ol>
+	<li><p>
+The Package is an original work written by SnertSoft,
+with exception of following third party code:
+	</p>
+		<ol>
+		<li><p>
+MD5 routines written by L. Peter Deutsch, based on RFC 1321;
+		</p></li>
+		<li><p>
+SQLite3 package is written by D. Richard Hipp of Hwaci
+and is in the public domain.
+		</p></li>
+		<li><p>
+
+strnatcmp.c is written by Martin Pool of sourcefrog.net and
+     	has a BSD style license.
+		</p></li>
+		<li><p>
+Protothreads headers originally written by Adam Dunkels and
+has a BSD style license.
+		</p></li>
+
+		</ol>
+	</li>
+	</ol>
+</li>
+
+
 <li><h4>License To Use</h4>
 	<ol>
 	<li><p>
-	If You are a Private Individual and so
-     benefited from a reduced purchase price, then You may only
-     compile, install, and use this Package, with or without private
-     modifications, exclusively on a single machine You legally own or
-     rent from a third party, provided You retain this notice, the Author's copyright
-     notice, any and all license control methods (<a href="#License_Control">see below</a>), and any
-     links within the Package back to the most current online versions
-     of this License and Disclaimer.
-	</p></li>
-	<li><p>
-    Otherwise if You have paid the full purchase price, then You may
-     compile, install, and use this Package, with or without private
-     modifications, exclusively on machines You legally own or rent from a third party,
-     provided You retain this notice, the Author's copyright notice,
-     any and all license control methods (<a href="#License_Control">see below</a>), and any links
-     within the Package back to the most current online versions of
-     this License and Disclaimer.
+You may install and use this Package, without modifications,
+exclusively on machines for which You have purchased a license,
+provided You retain this notice, SnertSoft's copyright notice,
+any and all license control methods (<a href="#License_Control">see below</a>),
+and any links within the Package back to the most current online versions of
+this License and Disclaimer.
 	</p></li>
 	<li><p>
 You may copy, share, distribute, modify, and create derivative
@@ -1049,17 +1068,16 @@ other current or future forms of storage or communication media
 of the Package, with or without modifications, including any
 and all derivative works such as source patches, binaries,
 binary patches, or similar is expressly forbidden without prior
-written permission in hardcopy (letter or fax) signed and dated
-by the Author.
+written permission in hardcopy (ie. letter or fax) signed and dated
+by SnertSoft.
 	</p></li>
 	<li><p>
-
 It is expressly forbidden for You to use the Package, in whole
-or in part, in any other software, except those designated by
-the Author.
+or in part, in any other software or appliance without prior
+written permission in hardcopy (ie. letter or fax) signed and dated
+by SnertSoft.
 	</p></li>
 	<li><p>
-
 It is expressly forbidden for You to use the Package to develop
 any software or other technology having the same primary
 function as the Package, including but not limited to using the
@@ -1069,10 +1087,9 @@ software or other technology performs in a similar manner as
 the Package.
 	</p></li>
 	<li><p>
-
 You may not sell, rent, lease, or transfer the Package to third
-parties without prior written permission in hardcopy (letter or fax)
-signed and dated by the Author.
+parties without prior written permission in hardcopy (ie. letter or fax)
+signed and dated by SnertSoft.
 	</p></li>
 	</ol>
 </li>
@@ -1083,9 +1100,15 @@ signed and dated by the Author.
 	<li><p>
 This Agreement is effective until terminated. You may
 terminate this Agreement at any time by destroying all copies
-of the Package. This Agreement will terminate immediately without
-notice from the Author if You fail to comply with any provision
-of this Agreement. Either party may terminate this Agreement
+of the Package.
+	</p></li>
+	<li><p>
+This Agreement will terminate immediately without
+notice from SnertSoft if You fail to comply with any provision
+of this Agreement.
+	</p></li>
+	<li><p>
+Either party may terminate this Agreement
 immediately should any portion of the Package become, or in
 either party's opinion be likely to become, the subject of a
 claim of infringement of any intellectual property right. Upon
@@ -1098,18 +1121,19 @@ Termination, You must destroy all copies of the Package.
 <li><h4>Versions Of The License</h4>
 	<ol>
 	<li><p>
-New Versions. The Author may publish revised and/or new
+New Versions. SnertSoft may publish revised and/or new
 versions of the License from time to time. Each version will
 be given a distinguishing version number.
 	</p></li>
 	<li><p>
-
 Effect of New Versions. Once a version of the Package has been
 published under a particular version of the License, You may
 always continue to use it under the terms of that License
 version. You may also choose to use such Package under the
-terms of any subsequent version of the License published by the
-Author. No one other than the Author has the right to modify
+terms of the most current version of the License published by SnertSoft.
+	</p></li>
+	<li><p>
+No one other than SnertSoft has the right to modify
 the terms applicable to the Package created under this License.
 	</p></li>
 	</ol>
@@ -1123,7 +1147,7 @@ the terms applicable to the Package created under this License.
 THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED
 WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO WAY SHALL THE AUTHOR OR LICENSEE BE LIABLE FOR ANY DIRECT, INDIRECT,
+IN NO WAY SHALL SNERTSOFT OR LICENSEE BE LIABLE FOR ANY DIRECT, INDIRECT,
 INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
@@ -1138,11 +1162,11 @@ POSSIBILITY OF SUCH DAMAGE.
 <p>
 The Package may use one or more license control methods including, but
 not limited to, license key activation, periodic reporting of Package
-details and IP address of installation to SnertSoft, remote license
-verification by SnertSoft, or other future technical means. Any
-information reported to or gathered by SnertSoft shall remain strictly
-confidential and the private property of SnertSoft. Under no
-circumstances will SnertSoft resell or release this information to third
+details and IP address of installation to SnertSoft &amp; Co., or remote license
+verification by SnertSoft &amp; Co.. Any information reported to
+or gathered by SnertSoft &amp; Co. shall remain strictly
+confidential and the private property of SnertSoft &amp; Co.. Under no
+circumstances will SnertSoft &amp; Co. resell or release this information to third
 parties, unless demanded by court order.
 </p>
 
@@ -1150,9 +1174,18 @@ parties, unless demanded by court order.
 <h3>Support</h3>
 
 <p>
-Support is only provided for the Author's original Package. Priority
-support can be purchased. Free support is limited, based on the Author's
-availability, though enhancements requests and problem reports are welcome.
+Support is provided for one year from date of purchase and only for SnertSoft's original
+Package that was purchased directly from SnertSoft. Additional support beyond the first
+year can be obtained from SnertSoft on time &amp; materials basis or from one of SnertSoft's
+authorised partners.
+</p>
+<p>
+Support for the Package obtained from authorised partners, such as value-added resllers or
+appliance manufacturers, will be supplied by those partners. SnertSoft will not support
+the Package without proof of purchase from SnertSoft, such as an Order N&deg; or Invoice N&deg;.
+</p>
+<p>
+Package enhancements requests and product suggestions are always welcome.
 A community mailing list is available; please refer to
 <a href="http://www.snertsoft.com/">SnertSoft</a> web site Support area for details.
 </p>

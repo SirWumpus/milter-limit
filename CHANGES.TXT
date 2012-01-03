@@ -9,6 +9,12 @@ is no set schedule for releases.
 --TODO--
 
 
+--0.16--
+
+   *	Requires LibSnert 1.75.8
+
+   !	Configure and build changes to reflect changes in libsnert.
+
 --0.15--
 
    !	Assert unlimited (-1) default for milter-limit-rcpt-connect and

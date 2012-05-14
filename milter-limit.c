@@ -178,6 +178,7 @@ typedef struct {
 	LimitInfo auth;				/* per message */
 	LimitInfo mail;				/* per message */
 	Vector rcpts;				/* per message */
+	unsigned msg_rcpt_count;		/* per message */
 	int maxRcptConnect;			/* per connection */
 	int maxRcptSender;			/* per message */
 	int hasPass;				/* per message */
@@ -504,6 +505,9 @@ limitExceeded(workspace data, const char *who, const char *limit)
 	);
 
 	switch (*optPolicy.string) {
+	default:
+		/* The other policies are handled EOM. */
+		break;
 	case 'd':
 		return SMFIS_DISCARD;
 	case 'l':
@@ -642,6 +646,7 @@ filterMail(SMFICTX *ctx, char **args)
 	data->mail.value = NULL;
 
 	VectorRemoveAll(data->rcpts);
+	data->msg_rcpt_count = 0;
 
 	data->reply[0] = '\0';
 
@@ -761,35 +766,37 @@ filterRcpt(SMFICTX *ctx, char **args)
 	if (data->auth.over != -1) {
 		if (data->auth.over != SMFIS_CONTINUE)
 			return limitExceeded(data, data->auth.key, data->auth.value);
-
-		return SMFIS_CONTINUE;
 	}
 
 	if (rcpt->over != -1) {
 		if (rcpt->over != SMFIS_CONTINUE)
 			return limitExceeded(data, NULL, rcpt->value);
-
-		return SMFIS_CONTINUE;
 	}
 
 	if (data->mail.over != -1) {
 		if (data->mail.over != SMFIS_CONTINUE)
 			return limitExceeded(data, data->mail.key, data->mail.value);
-
-		return SMFIS_CONTINUE;
 	}
 
 	if (data->client.over != -1) {
 		if (data->client.over != SMFIS_CONTINUE)
 			return limitExceeded(data, data->client.key, data->client.value);
-
-		return SMFIS_CONTINUE;
 	}
 
-	if (0 <= data->maxRcptSender && data->maxRcptSender < VectorLength(data->rcpts)) {
+	data->msg_rcpt_count++;
+
+	if (0 <= data->maxRcptSender && data->maxRcptSender < data->msg_rcpt_count) {
 		if (optAbsoluteRcptLimit.value)
 			return smfReply(&data->work, 550, "5.5.3", "absolute recipient limit %d exceeded", data->maxRcptSender);
-		return smfReply(&data->work, 452, "4.5.3", "recipient limit %d exceeded", data->maxRcptSender);
+
+		if (*optPolicy.string != 'q')
+			return smfReply(&data->work, 452, "4.5.3", "recipient limit %d exceeded", data->maxRcptSender);
+
+		/* Set reply for quarantine. */
+		(void) snprintf(
+			data->reply, sizeof (data->reply),
+			"recipient limit %d exceeded", data->maxRcptSender
+		);
 	}
 
 	return SMFIS_CONTINUE;

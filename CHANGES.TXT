@@ -8,12 +8,34 @@ is no set schedule for releases.
 
 --TODO--
 
+   +	Request by Panagiotis Christias: limit number of rcpts over a
+   	time period per sender.
+
+   		limit-list := limit [, limit-list]
+   		limit := number [ / unit ][ type ]
+   		unit := w | d | h | m
+   		type := M | R
 
 --0.16--
 
-   *	Requires LibSnert 1.75.8
+   *	Requires LibSnert 1.75.15
 
    !	Configure and build changes to reflect changes in libsnert.
+
+   !	Added special case exception for milter-limit-rcpt-* tags: if
+	the per message recipient limit is exceeded, quarantine policy
+	is set, and -absolute-rcpt-limit set, then accept the message
+	and quarantine it. This changes the -absolute-rcpt-limit usage
+	case slightly. Requested by Panagiotis Christias.
+
+   	The original intent of milter-limit-rcpt-* tags was to force
+	sending MTAs to do envelope splitting when only some recipients
+	are accepted, because spamware typically does not do envelope
+	splitting. But times have changed with more user accounts having
+	been phished such that milter-limit is being applied to outbound
+	filter problems as well.
+
+   !	Fixed precedence handling of tags.
 
 --0.15--
 

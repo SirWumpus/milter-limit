@@ -1,7 +1,7 @@
 /*
  * milter-limit.c
  *
- * Copyright 2003, 2012 by Anthony Howe. All rights reserved.
+ * Copyright 2003, 2019 by Anthony Howe. All rights reserved.
  *
  * The following should be added to the sendmail.mc file:
  *
@@ -213,7 +213,7 @@ static const char usage_absolute_rcpt_limit[] =
 "#"
 ;
 
-static Option optIntro			= { "",			NULL,		"\n# " MILTER_NAME "/" MILTER_VERSION "." MILTER_BUILD_STRING "\n#\n# " MILTER_COPYRIGHT "\n#\n" };
+static Option optIntro			= { "",			NULL,			"\n# " MILTER_NAME "/" MILTER_VERSION "\n#\n# " MILTER_COPYRIGHT "\n#\n" };
 static Option optCacheGcFrequency	= { "cache-gc-frequency", "250",	"Cache garbadge collection frequency." };
 static Option optCacheType		= { "cache-type",	"bdb",		"Cache type from one of: bdb, flatfile, hash" };
 static Option optCacheFile		= { "cache-file",	CACHE_FILE,	"Cache file path for bdb or flatfile types." };

@@ -16,6 +16,12 @@ is no set schedule for releases.
    		unit := w | d | h | m
    		type := M | R
 
+--0.16.2--
+
+   *	Requires LibSnert 1.75.56
+
+   !	Fix build process for recent changes to SQLite3.
+
 --0.16--
 
    *	Requires LibSnert 1.75.15

@@ -70,7 +70,7 @@ LIB_DB		:= @HAVE_LIB_DB@
 CFLAGS_DB	:= @CFLAGS_DB@
 LDFLAGS_DB	:= @LDFLAGS_DB@
 
-LIB_MILTER	:= @HAVE_LIB_MILTER@
+LIB_MILTER	:= @LIBS_MILTER@
 CFLAGS_MILTER	:= @CFLAGS_MILTER@
 LDFLAGS_MILTER	:= @LDFLAGS_MILTER@
 
@@ -163,7 +163,7 @@ tar: MANIFEST.TXT configure manual.shtml
 	@echo '***************************************************************'
 	@cd ${SNERT_TARDIR}; ${MD5SUM} ${TARFILE} | tee com/snert/src/${MILTER}/${MILTER}.md5
 	@echo '***************************************************************'
-	@cd $(SNERT_TARDIR); wc -c $(TARFILE)
+	@cd $(SNERT_TARDIR); wc -c ${TARFILE}
 	@echo '***************************************************************'
 	@echo
 

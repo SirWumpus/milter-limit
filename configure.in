@@ -27,12 +27,12 @@ AC_CONFIG_SRCDIR($PACKAGE_TARNAME.c)
 #	Auxliary files to be modified later
 #######################################################################
 
+AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_FILES(manual.shtml)
 AC_CONFIG_FILES(startup.sh)
 AC_CONFIG_FILES(sample.mc)
 AC_CONFIG_FILES(install.sh)
 AC_CONFIG_FILES(makefile)
-AC_CONFIG_HEADERS(config.h)
 
 #######################################################################
 #	Configuration options: settings
@@ -85,13 +85,18 @@ if test -f '../lib/version.sh' ; then
 	AC_SUBST(LIBS_RT)
 	AC_SUBST(HAVE_LIB_SEM)
 
+	AC_SUBST(CFLAGS_SNERT)
+	AC_SUBST(CPPFLAGS_SNERT)
+	AC_SUBST(LDFLAGS_SNERT)
+	AC_SUBST(LIBS_SNERT)
+
 	AC_SUBST(CFLAGS_DB)
 	AC_SUBST(LDFLAGS_DB)
 	AC_SUBST(HAVE_LIB_DB)
 
 	AC_SUBST(CFLAGS_MILTER)
 	AC_SUBST(LDFLAGS_MILTER)
-	AC_SUBST(HAVE_LIB_MILTER)
+	AC_SUBST(LIBS_MILTER)
 
 	AC_SUBST(CFLAGS_SQLITE3)
 	AC_SUBST(LDFLAGS_SQLITE3)
